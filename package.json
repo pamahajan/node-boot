@@ -1,0 +1,20 @@
+{
+  "name": "node-base-project",
+  "version": "1.0.0",
+  "description": "node base user crud - koa@3 - node@8",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/index.js | node_modules/bunyan/bin/bunyan"
+  },
+  "author": "Parth Mahajan oo1",
+  "license": "ISC",
+  "dependencies": {
+    "bunyan": "^1.8.10",
+    "koa": "^2.3.0",
+    "koa-morgan": "^1.0.1",
+    "koa-router": "^7.2.1",
+    "lodash": "^4.17.4",
+    "mongoose": "^4.11.3"
+  }
+}
