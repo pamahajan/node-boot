@@ -6,4 +6,7 @@ let Path = require('path'),
 module.exports.default = (appRouter) => {
   
   l.info('Defining application routes');
+
+  let userRouter = require('./api/user').router;
+  appRouter.use('/v1/user', userRouter.routes());
 }

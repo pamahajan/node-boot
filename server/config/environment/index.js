@@ -15,7 +15,7 @@ let all = {
 
 	root: path.normalize(__dirname + '/../../../'),
 
-	prot: process.env.PORT || 9000,
+	port: process.env.PORT || 9000,
 
 	ip: process.env.IP || '127.0.0.1',
 
