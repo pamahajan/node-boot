@@ -15,3 +15,13 @@ exports.create = async function(user){
 		throw(err);
 	}
 }
+
+exports.get = async function(params){
+	try{
+
+		return await User.find(params.q || {}).exec();
+	} catch(err){
+		l.error('File: User.Service --> get --> Error -->', err);
+		throw(err);	
+	}
+}

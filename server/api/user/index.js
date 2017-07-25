@@ -9,5 +9,7 @@ let Router = require('koa-router'),
 	convert = require('koa-convert');
 
 userRouter.post('/', convert(parse()), userController.createCtrl);
+userRouter.get('/', userController.getUserCtrl);
+userRouter.get('/:id', userController.getUserCtrl);
 
 exports.router = userRouter;
