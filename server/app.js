@@ -29,7 +29,7 @@ mongoose.connect(config.mongo.uri, config.mongo.options);
 mongoose.connection.on('error', err => {
 	l.error('MongoDB connection error: ', err);
 	process.exit(-1);
-})
+});
 
 mongoose.set('debug', true);
 

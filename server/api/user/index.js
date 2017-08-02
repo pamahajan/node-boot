@@ -11,5 +11,6 @@ let Router = require('koa-router'),
 userRouter.post('/', convert(parse()), userController.createCtrl);
 userRouter.get('/', userController.getUserCtrl);
 userRouter.get('/:id', userController.getUserCtrl);
+userRouter.get('/count/all', userController.getUserCount);
 
 exports.router = userRouter;

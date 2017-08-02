@@ -16,27 +16,28 @@ exports.createCtrl = async function(ctx, next){
 			ctx.throw('Internal Server Error', 500);
 
 		l.info('user Added, user -->', newUser);
+		await incrUserCount();
 		ctx.body = {
 			success: true,
 			user: newUser
 		}
 		ctx.status = 200;
 	} catch(err){
-		
+
 		ctx.status = err.status || 500;
 		ctx.body = {
 			success: false,
 			error: err.message || 'Internal Server Error'
 		},
 		l.error('File: User.Controller --> createCtrl --> Error --> ', err);
-		ctx.app.emit(err, 'error', ctx);	
+		ctx.app.emit(err, 'error', ctx);
 	}
 }
 
 exports.getUserCtrl = async function(ctx, next){
 	try{
 
-		let userId = ctx.params.id;	
+		let userId = ctx.params.id;
 		let q = {};
 		if(userId)
 			q._id = userId;
@@ -63,10 +64,31 @@ exports.getUserCtrl = async function(ctx, next){
 			error: err.message || 'Internal Server Error'
 		},
 		l.error('File: User.Controller --> getUserCtrl --> Error --> ', err);
-		ctx.app.emit(err, 'error', ctx);	
+		ctx.app.emit(err, 'error', ctx);
 	}
 }
 
+exports.getUserCount = async function(ctx, next){
+		try{
+
+			let userCount = await UserServices.getUserCount();
+
+			ctx.body = {
+				success: true,
+				count: userCount
+			};
+			ctx.status = 200;
+		} catch(err){
+
+			ctx.status = err.status || 500;
+			ctx.body = {
+				success: false,
+				error: err.message || 'Internal Server Error'
+			},
+			l.error('File: User.Controller --> getUserCount --> Error --> ', err);
+			ctx.app.emit(err, 'error', ctx);
+		}
+}
 
 let create = async function(userData){
 	try{
@@ -84,6 +106,17 @@ let get = async function(params){
 		return await UserServices.get(params);
 	} catch(err){
 		l.error('File: user.controller --> get --> Error --> ', err);
+		throw(err);
+	}
+}
+
+let incrUserCount = async function(){
+	try{
+
+		return await UserServices.incrUserCount();
+	} catch(err){
+
+		l.error('File: user.controller --> incrUserCount --> Error', err);
 		throw(err);
 	}
 }
